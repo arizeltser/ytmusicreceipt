@@ -26,7 +26,7 @@ if previous_month == 0:
 previous_month_name = datetime.date(1900, previous_month, 1).strftime('%B')
 year_name = str(year)
 
-if current_date.day == 1:
+if current_date.day == 4:
     # get history
     history = ytmusic.get_history()
 
