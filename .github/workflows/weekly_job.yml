@@ -25,6 +25,5 @@ jobs:
       - name: execute py script # run main.py
         env:
          OAUTH_SECRET: ${{ secrets.OAUTH_JSON }}
-        env:
          EMAILAUTH_SECRET: ${{ secrets.EMAILAUTH_JSON }}
         run: python3 main.py
