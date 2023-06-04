@@ -1,0 +1,29 @@
+name: run main.py
+
+on:
+  schedule:
+    - cron: '0 10 1 * *' # At 10:00 the first of every month
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9.6' # install the python version needed
+
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: execute py script # run main.py
+        env:
+         OAUTH_SECRET: ${{ secrets.OAUTH_JSON }}
+        env:
+         EMAILAUTH_SECRET: ${{ secrets.EMAILAUTH_JSON }}
+        run: python3 main.py
