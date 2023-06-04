@@ -4,9 +4,15 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import json
+import os
 
 # setup connection to YTMusic
-ytmusic = YTMusic("oauth.json")
+try:
+    OAUTH = os.environ["OAUTH_SECRET"]
+except KeyError:
+    raise KeyError("OAUTH_SECRET not available!")
+
+ytmusic = YTMusic(OAUTH)
 
 # get current date
 current_date = datetime.datetime.now()
@@ -20,7 +26,7 @@ if previous_month == 0:
 previous_month_name = datetime.date(1900, previous_month, 1).strftime('%B')
 year_name = str(year)
 
-if current_date.day == 4:
+if current_date.day == 1:
     # get history
     history = ytmusic.get_history()
 
@@ -53,7 +59,12 @@ if current_date.day == 4:
 smtp_server = "smtp.gmail.com" 
 smtp_port = 587
 
-emailAuth = json.load(open('emailauth.json'))
+emailauth_file = os.getenv("EMAILAUTH_JSON")
+try:
+    EMAILAUTH = os.environ["EMAILAUTH_SECRET"]
+except KeyError:
+    raise KeyError("EMAILAUTH_SECRET not available!")
+emailAuth = json.loads(EMAILAUTH)
 
 login_email = emailAuth['email']
 login_password = emailAuth['password']
