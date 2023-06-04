@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Time Check
+        if: github.event.schedule == '57 11 4 * *'
+        run: echo "Running on schedule"
+
       - name: checkout repo content
         uses: actions/checkout@main # checkout the repository content
 
