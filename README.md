@@ -1,5 +1,5 @@
 # ytmusicreceipt
-A take on Receiptify (https://receiptify.herokuapp.com/index.html).
+A take on Receiptify (https://receiptify.herokuapp.com).
 
 Every month an email is sent containing the users ten most listened to songs from Youtube Music.
 
